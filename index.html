@@ -1,29 +1,507 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análise da professores da UFLA 2025</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatório de Análise de Dados</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <style>
+/* === PALETA PROFISSIONAL MARCANTE === */
+:root {
+  --electric-blue: #0EA5E9;
+  --deep-purple: #7C3AED;
+  --neon-cyan: #06B6D4;
+  --amber: #F59E0B;
+  --emerald: #10B981;
+  --ruby: #EF4444;
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+  /* Tons neutros profissionais */
+  --surface-light: #FFFFFF;
+  --surface-muted: #F1F5F9;
+  --background-light: #F8FAFC;
+
+  --text-strong: #1E293B;
+  --text-muted: #64748B;
+
+  /* DARK */
+  --background-dark: #0F172A;
+  --surface-dark: #1E293B;
+  --surface-dark-muted: #334155;
+
+  --text-strong-dark: #F1F5F9;
+  --text-muted-dark: #94A3B8;
+}
+
+/* === LIGHT MODE === */
+body {
+  background: var(--background-light);
+  color: var(--text-strong);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  transition: background .3s ease, color .3s ease;
+  line-height: 1.6;
+}
+
+body .hero {
+  background: linear-gradient(135deg, var(--deep-purple), var(--electric-blue), var(--neon-cyan)) !important;
+  color: white !important;
+  padding: 3rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+body .hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  opacity: 0.3;
+}
+
+body .hero .hero-body {
+  position: relative;
+  z-index: 1;
+}
+
+/* Cards e boxes */
+.card {
+  background: var(--surface-light);
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.1);
+  transition: all .3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1), 0 4px 8px rgba(0,0,0,0.06);
+}
+
+.box {
+  background: var(--surface-light);
+  border: 1px solid #E2E8F0 !important;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all .3s ease;
+}
+
+/* Tabelas */
+.table {
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead th {
+  background: var(--deep-purple) !important;
+  color: white !important;
+  padding: 1rem 1.5rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+  border: none !important;
+  text-align: left;
+}
+
+.table tbody tr {
+  transition: all .2s ease;
+  border-bottom: 1px solid #E2E8F0;
+}
+
+.table tbody tr:hover {
+  background: rgba(14, 165, 233, 0.08) !important;
+  transform: scale(1.01);
+}
+
+.table tbody tr:last-child {
+  border-bottom: none;
+  background: var(--surface-muted) !important;
+  font-weight: 600;
+}
+
+.table tbody td {
+  padding: 1rem 1.5rem;
+  border: none !important;
+  vertical-align: middle;
+}
+
+/* Tipografia */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.title {
+  color: var(--text-strong);
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Card Header customizado */
+.card-header {
+  background: linear-gradient(135deg, var(--electric-blue), var(--neon-cyan)) !important;
+  border-radius: 12px 12px 0 0;
+  padding: 1rem 1.5rem;
+  border-bottom: none !important;
+}
+
+.card-header-title {
+  color: white !important;
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.3px;
+}
+
+/* Box de métricas */
+.box.metric-box {
+  background: linear-gradient(135deg, var(--deep-purple), var(--electric-blue));
+  color: white;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  border: none !important;
+  transition: all .3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.box.metric-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(30%, -30%);
+}
+
+.box.metric-box:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(124, 58, 237, 0.3);
+}
+
+.box.metric-box:nth-child(2) {
+  background: linear-gradient(135deg, var(--emerald), var(--neon-cyan));
+}
+
+.box.metric-box:nth-child(3) {
+  background: linear-gradient(135deg, var(--amber), var(--ruby));
+}
+
+.box.metric-box:nth-child(4) {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--electric-blue));
+}
+
+.box.metric-box .heading {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+}
+
+.box.metric-box .title {
+  color: white !important;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark Mode ======================================= */
+body.dark {
+  background: var(--background-dark);
+  color: var(--text-strong-dark);
+}
+
+body.dark .hero {
+  background: linear-gradient(135deg, var(--deep-purple), var(--electric-blue), var(--neon-cyan)) !important;
+}
+
+body.dark .card {
+  background: var(--surface-dark);
+  border: 1px solid var(--surface-dark-muted) !important;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3), 0 1px 3px rgba(0,0,0,0.2);
+}
+
+body.dark .card:hover {
+  box-shadow: 0 12px 24px rgba(0,0,0,0.4), 0 4px 8px rgba(0,0,0,0.3);
+}
+
+body.dark .box {
+  background: var(--surface-dark);
+  border: 1px solid var(--surface-dark-muted) !important;
+}
+
+body.dark .table {
+  background: var(--surface-dark) !important;
+  color: var(--text-strong-dark);
+}
+
+body.dark .table thead th {
+  background: var(--deep-purple) !important;
+}
+
+body.dark .table tbody tr {
+  background: var(--surface-dark) !important;
+  border-bottom: 1px solid #334155;
+}
+
+body.dark .table tbody tr:hover {
+  background: rgba(14, 165, 233, 0.15) !important;
+}
+
+body.dark .table tbody tr:last-child {
+  background: var(--surface-dark-muted) !important;
+}
+
+body.dark .table tbody td {
+  color: var(--text-muted-dark) !important;
+  background: transparent !important;
+}
+
+body.dark .table tbody td strong {
+  color: var(--text-strong-dark) !important;
+}
+
+body.dark .title {
+  color: var(--text-strong-dark);
+}
+
+body.dark .content {
+  color: var(--text-muted-dark);
+}
+
+body.dark .content strong {
+  color: var(--text-strong-dark);
+}
+
+/* Toggle */
+.dark-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 999;
+  background: linear-gradient(135deg, var(--deep-purple), var(--electric-blue));
+  color: white;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(124, 58, 237, 0.5);
+  transition: all .3s ease;
+}
+
+.dark-toggle:hover { 
+  transform: scale(1.1);
+  box-shadow: 0 6px 25px rgba(124, 58, 237, 0.7);
+}
+
+body.dark .dark-toggle {
+  background: linear-gradient(135deg, var(--amber), var(--ruby));
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.5);
+}
+
+body.dark .dark-toggle:hover {
+  box-shadow: 0 6px 25px rgba(245, 158, 11, 0.7);
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.badge.success {
+  background: linear-gradient(135deg, var(--emerald), var(--neon-cyan));
+  color: white;
+}
+
+.badge.warning {
+  background: linear-gradient(135deg, var(--amber), var(--ruby));
+  color: white;
+}
+
+  </style>
 </head>
 <body>
-    <header class="has-text-centered">
+  <button class="dark-toggle" onclick="toggleDark()">🌙</button>
 
-        <section class="section">
-            <div class="container">
-                <h1 class="title">Análise da professores da UFLA 2025</h1>
-                <p class="subtitle"></p>
-            </div>
-        </section>
+  <!-- HEADER -->
+  <section class="hero is-primary">
+    <div class="hero-body">
+      <p class="title is-2">Relatório de Análise de Dados</p>
+      <p class="subtitle is-5">Dashboard Executivo - Período 2024</p>
+    </div>
+  </section>
 
-    </header>
-    <main>
-        <section class="section">
-            <div class="container">
-                <h2 class="title is-4">Sobre o projeto</h2>
-                <p>Este projeto visa analisar os dados dos professores da Universidade Federal de Lavras (UFLA) para o ano de 2025, com o objetivo de compreender melhor o perfil acadêmico e profissional dos docentes.</p>
+  <div class="container mt-5">
+
+    <!-- CARD 1: RESUMO -->
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">📊 Resumo Executivo</p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          <p><strong>Visão Geral:</strong> Este relatório apresenta uma análise profissional com design moderno e cores marcantes. O template utiliza gradientes vibrantes que transmitem profissionalismo e energia, ideais para apresentações corporativas e dashboards executivos.</p>
+          <p>Principais destaques incluem métricas de desempenho, análise de dados e insights estratégicos para tomada de decisão.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 2: MÉTRICAS PRINCIPAIS -->
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">📈 Métricas Principais</p>
+      </header>
+      <div class="card-content">
+        <div class="columns is-multiline">
+          <div class="column is-one-quarter">
+            <div class="box metric-box has-text-centered">
+              <p class="heading">Total de Vendas</p>
+              <p class="title">243K</p>
             </div>
-    </main>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="box metric-box has-text-centered">
+              <p class="heading">Taxa de Conversão</p>
+              <p class="title">89%</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="box metric-box has-text-centered">
+              <p class="heading">Usuários Ativos</p>
+              <p class="title">12.5K</p>
+            </div>
+          </div>
+          <div class="column is-one-quarter">
+            <div class="box metric-box has-text-centered">
+              <p class="heading">Crescimento</p>
+              <p class="title">+24%</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3: GRÁFICO -->
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">📉 Análise de Performance</p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          <figure class="image is-4by3">
+            <img src="https://via.placeholder.com/800x600/7C3AED/FFFFFF?text=Insira+seu+gr%C3%A1fico+aqui" alt="Gráfico de análise">
+          </figure>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 4: TABELA DE DADOS -->
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">📋 Detalhamento por Categoria</p>
+      </header>
+      <div class="card-content">
+        <div class="table-container">
+          <table class="table is-fullwidth is-striped is-hoverable">
+            <thead>
+              <tr>
+                <th>Categoria</th>
+                <th>Receita</th>
+                <th>Percentual</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Tecnologia</strong></td>
+                <td>R$ 125.430</td>
+                <td>38%</td>
+                <td><span class="badge success">✓ Ativo</span></td>
+              </tr>
+              <tr>
+                <td><strong>Marketing</strong></td>
+                <td>R$ 98.920</td>
+                <td>30%</td>
+                <td><span class="badge success">✓ Ativo</span></td>
+              </tr>
+              <tr>
+                <td><strong>Operações</strong></td>
+                <td>R$ 104.210</td>
+                <td>32%</td>
+                <td><span class="badge warning">⚠ Atenção</span></td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>R$ 328.560</strong></td>
+                <td><strong>100%</strong></td>
+                <td>-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 5: CONCLUSÃO -->
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">✅ Conclusões e Recomendações</p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          <p><strong>Principais Insights:</strong></p>
+          <ul>
+            <li><strong>Crescimento Sustentável:</strong> Taxa de conversão de 89% demonstra excelente performance</li>
+            <li><strong>Base Sólida:</strong> 12.5K usuários ativos representam engajamento consistente</li>
+            <li><strong>Tendência Positiva:</strong> Crescimento de +24% indica momentum favorável</li>
+          </ul>
+          
+          <p><strong>Próximos Passos:</strong></p>
+          <ol>
+            <li>Monitorar a categoria Operações marcada com atenção</li>
+            <li>Expandir investimentos em áreas de alto desempenho</li>
+            <li>Implementar automações para otimizar processos</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+  const toggleDark = () => {
+    document.body.classList.toggle('dark');
+    const btn = document.querySelector('.dark-toggle');
+    btn.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+  };
+
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark');
+    document.querySelector('.dark-toggle').textContent = '☀️';
+  }
+  </script>
+
 </body>
 </html>
