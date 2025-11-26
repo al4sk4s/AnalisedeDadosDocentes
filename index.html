@@ -14,7 +14,7 @@
   <section class="hero is-primary">
     <div class="hero-body">
       <p class="title is-2">Relatório de Análise de Dados</p>
-      <p class="subtitle is-5">Dashboard Executivo - Período 2024</p>
+      <p class="subtitle is-5">Dashboard Executivo - Período (2022 - 2025)</p>
     </div>
   </section>
 
@@ -50,28 +50,50 @@
       </header>
       <div class="card-content">
         <div class="columns is-multiline">
-          <div class="column is-one-quarter">
+          <div class="column is-one-third">
             <div class="box metric-box has-text-centered">
               <p class="heading">Total de Professores</p>
               <p class="title">38</p>
             </div>
           </div>
-          <div class="column is-one-quarter">
+          <div class="column is-one-third">
             <div class="box metric-box has-text-centered">
               <p class="heading">Total de Artigos Publicados</p>
               <p class="title">186</p>
             </div>
           </div>
-          <div class="column is-one-quarter">
+          <div class="column is-one-third">
             <div class="box metric-box has-text-centered">
               <p class="heading">Produção Total Geral</p>
               <p class="title">366</p>
             </div>
           </div>
-          <div class="column is-one-quarter">
-            <div class="box metric-box has-text-centered">
-              <p class="heading">Algo a colocar</p>
-              <p class="title">Xx</p>
+        </div>
+      </div>
+    </div>
+    <!-- CARD 3 - DADOS PREOCUPANTES -->
+    <div class="card mb-5">
+      <header class="alert card-header">
+        <p class="card-header-title">❕Dados preocupantes</p>
+      </header>
+      <div class="card-content">
+        <div class="columns is-multiline">
+          <div class="column is-one-third">
+            <div class="box alert-box has-text-centered">
+              <p class="heading">Professores com Capacitação Didática</p>
+              <p class="title">61%</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box alert-box has-text-centered">
+              <p class="heading">Professores com experiência EAD</p>
+              <p class="title">58%</p>
+            </div>
+          </div>
+          <div class="column is-one-third">
+            <div class="box alert-box has-text-centered">
+              <p class="heading">Indice de completude médio</p>
+              <p class="title">2,4</p>
             </div>
           </div>
         </div>
@@ -97,28 +119,28 @@
             <tbody>
 
               <tr>
-                <td><strong>Alta Produção</strong></td>
+                <td><strong>Alta Produção(>35)</strong></td>
                 <td>5 docentes</td>
                 <td>13%</td>
                 <td><span class="badge success">✓ Destaque</span></td>
               </tr>
 
               <tr>
-                <td><strong>Média Produção</strong></td>
+                <td><strong>Média Produção(<35)</strong></td>
                 <td>10 docentes</td>
                 <td>26%</td>
                 <td><span class="badge success">✓ Estável</span></td>
               </tr>
 
               <tr>
-                <td><strong>Baixa Produção</strong></td>
+                <td><strong>Baixa Produção(<18)</strong></td>
                 <td>22 docentes</td>
                 <td>58%</td>
                 <td><span class="badge warning">⚠ Atenção</span></td>
               </tr>
 
               <tr>
-                <td><strong>Sem Produção</strong></td>
+                <td><strong>Sem Produção(0)</strong></td>
                 <td>1 docente</td>
                 <td>3%</td>
                 <td><span class="badge danger">❗ Crítico</span></td>
@@ -183,6 +205,7 @@
         <div class="content">
             <p>Para garantir a qualidade da análise e o correto funcionamento do dashboard, foi realizada uma etapa completa de preparação dos dados. Inicialmente, a base original passou por uma reformatação estrutural, reorganizando colunas, padronizando termos
                 e corrigindo inconsistências. Essa padronização permitiu a manipulação mais eficiente das informações e evitou erros em fórmulas e tabelas dinâmicas.</p>
+            <p>Para a correção de inconsistências foi adotado a lógica de vazio = 0, para não quebrar os resultados finais e as respostas foram padronizadas os sim e não para texto capitalizado, evitanto falha do excel por causa das letras maiúsculas e minúsculas.</p>
             <p>Após a reestruturação, foi executado um processo de normalização e limpeza dos dados, garantindo consistência nos formatos textuais, numéricos e categóricos. Em seguida, criamos cinco novos campos derivados para enriquecer a análise e facilitar a
                 construção dos indicadores apresentados no dashboard:</p>
             <ul>
@@ -215,16 +238,28 @@
       </div>
     </div>
 
-    <div class="card mb-5">
+  <div class="card mb-5">
       <header class="card-header">
-        <p class="card-header-title">4. C — Elaboração da Solução (Dashboard e análises)</p>
+          <p class="card-header-title">4. C — Elaboração da Solução (Dashboard e Análises)</p>
       </header>
       <div class="card-content">
-        <div class="content">
-          
-        </div>
+          <div class="content">
+              <p>O dashboard foi concebido como a **solução visual** central, transformando a complexidade dos dados estudados em informações **acessíveis, compreensíveis e acionáveis**. Priorizamos um design que guiasse o usuário pelas descobertas, utilizando a construção de **gráficos interativos** e a exploração de **tabelas dinâmicas**.</p>
+
+              <p>Este recurso não apenas resume o trabalho, mas também permite a **filtragem e variação dos dados existentes**, proporcionando uma visão multifacetada das métricas-chave do corpo docente.</p>
+
+              <h4 class="title is-6 mt-4">Principais Descobertas e Análises (Insights)</h4>
+              
+              <p>A partir da análise detalhada, foi possível extrair insights cruciais sobre o perfil e as práticas dos professores:</p>
+              <ul>
+                  <li>**Interdisciplinaridade Limitada:** Atualmente, a maioria dos professores foca estritamente em sua área de formação principal. Apenas **17%** dos trabalhos e atividades desenvolvidas são classificados como pertencentes a outras áreas do conhecimento, indicando uma baixa taxa de **interdisciplinaridade**.</li>
+                  <li>**Lacuna na Capacitação EAD:** Uma parcela significativa dos professores, próxima da metade, ainda **não possui capacitação específica** para o Ensino a Distância (EAD), um ponto crítico para a flexibilização do ensino.</li>
+                  <li>**Déficit em Formação Didática:** Identificou-se que **39%** dos professores carecem de formação didática formal. Essa ausência pode impactar diretamente a eficácia das metodologias de ensino aplicadas em sala de aula.</li>
+              </ul>
+              <p>Estas descobertas fundamentam as próximas etapas de recomendação e planejamento estratégico.</p>
+          </div>
       </div>
-    </div>
+  </div>
 
     <div class="card mb-5">
       <header class="card-header">

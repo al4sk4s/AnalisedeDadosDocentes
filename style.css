@@ -209,6 +209,61 @@ h1, h2, h3, h4 {
   z-index: 1;
 }
 
+.alert.card-header{
+    background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+}
+.box.alert-box {
+  /* Gradiente base (Pode ser usado como Info/Padrão) */
+  background: linear-gradient(135deg, #ef4444cb, #dc2626be);
+  color: white;
+  border-radius: 12px;
+  padding: 1.5rem 1.5rem;
+  border: none !important;
+  transition: all .3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 0; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+
+.box.alert-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 80px; 
+  height: 80px; 
+  background: rgba(255, 255, 255, 0.15); 
+  border-radius: 50%;
+  transform: translate(30%, -30%);
+  z-index: -1;
+}
+
+.box.alert-box:hover {
+  transform: translateY(-4px); 
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); 
+}
+
+.box.alert-box .heading {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1.5px;
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.box.alert-box .title {
+  color: white !important;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
 /* Dark Mode ======================================= */
 body.dark {
   background: var(--background-dark);
