@@ -412,6 +412,218 @@ body.dark .dark-toggle:hover {
       </div>
     </div>
 
+    <!-- CARD 4: TABELA DE DADOS -->
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">📊 Detalhamento por Produtividade</p>
+      </header>
+      <div class="card-content">
+        <div class="table-container">
+          <table class="table is-fullwidth is-striped is-hoverable">
+            <thead>
+              <tr>
+                <th>Nível</th>
+                <th>Quantidade</th>
+                <th>Percentual</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td><strong>Alta Produção</strong></td>
+                <td>5 docentes</td>
+                <td>13%</td>
+                <td><span class="badge success">✓ Destaque</span></td>
+              </tr>
+
+              <tr>
+                <td><strong>Média Produção</strong></td>
+                <td>10 docentes</td>
+                <td>26%</td>
+                <td><span class="badge success">✓ Estável</span></td>
+              </tr>
+
+              <tr>
+                <td><strong>Baixa Produção</strong></td>
+                <td>22 docentes</td>
+                <td>58%</td>
+                <td><span class="badge warning">⚠ Atenção</span></td>
+              </tr>
+
+              <tr>
+                <td><strong>Sem Produção</strong></td>
+                <td>1 docente</td>
+                <td>3%</td>
+                <td><span class="badge danger">❗ Crítico</span></td>
+              </tr>
+
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>38 docentes</strong></td>
+                <td><strong>100%</strong></td>
+                <td>-</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD 3: 1. T — Entendimento do Domínio (Contextualização) -->
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">1. T — Entendimento do Domínio</p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+            <p><strong>Visão Geral:</strong> Este relatório apresenta uma análise estruturada sobre a produção docente da instituição, utilizando dados acadêmicos, profissionais e descritivos fornecidos pela base original. O objetivo é compreender o perfil dos professores,
+                seus padrões de produção, áreas de atuação e nível de completude de suas atividades, permitindo identificar tendências relevantes e possíveis assimetrias dentro do corpo docente. A partir dessa análise, gestores podem fundamentar decisões estratégicas
+                relacionadas a desenvolvimento institucional, políticas de incentivo, capacitação e distribuição de recursos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">2. R — Entendimento e Definição do Problema</p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+            <p>A instituição necessita compreender o perfil de produção de seus docentes para apoiar decisões relacionadas ao desenvolvimento acadêmico, distribuição de recursos e identificação de áreas que demandam atenção. Embora a base forneça diversos atributos,
+                o problema inicial não estava completamente definido e precisou ser refinado a partir da análise exploratória.</p>
+            <p>Diante desse cenário, estabelecemos um conjunto de perguntas prioritárias que orientaram a investigação e serviram como referência para a construção do dashboard. Essas questões definem claramente o problema a ser resolvido e delimitam o escopo da
+                análise:</p>
+            <ul>
+                <li><strong>Quem são os docentes com maior volume de produção?</strong></li>
+                <li><strong>Existe relação entre tempo de carreira e produtividade?</strong></li>
+                <li><strong>O índice de completude dos docentes apresenta padrões relevantes?</strong></li>
+                <li><strong>A produção está concentrada em uma área específica do conhecimento?</strong></li>
+                <li><strong>Docentes com experiência em EAD apresentam diferenças na produção?</strong></li>
+                <li><strong>Qual é o nível de diversificação da produção acadêmica por docente?</strong></li>
+            </ul>
+            <p>Essas perguntas direcionaram todo o processo de análise, o tratamento da base de dados e a criação dos indicadores derivados utilizados no dashboard. A partir delas, foi possível definir uma solução visual capaz de responder objetivamente às principais
+                demandas do problema proposto.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">3. A — Coleta e Entendimento dos Dados (Tratamento)</p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+            <p>Para garantir a qualidade da análise e o correto funcionamento do dashboard, foi realizada uma etapa completa de preparação dos dados. Inicialmente, a base original passou por uma reformatação estrutural, reorganizando colunas, padronizando termos
+                e corrigindo inconsistências. Essa padronização permitiu a manipulação mais eficiente das informações e evitou erros em fórmulas e tabelas dinâmicas.</p>
+            <p>Após a reestruturação, foi executado um processo de normalização e limpeza dos dados, garantindo consistência nos formatos textuais, numéricos e categóricos. Em seguida, criamos cinco novos campos derivados para enriquecer a análise e facilitar a
+                construção dos indicadores apresentados no dashboard:</p>
+            <ul>
+                <li><strong>"Tem_EAD":</strong> identifica automaticamente se o docente possui experiência em ensino a distância, analisando o campo de descrição correspondente. A coluna foi gerada a partir da fórmula:
+                    <br> <code>=SE(ÉNÚM(LOCALIZAR("sim"; MINÚSCULA(Database!$F2))); "Sim"; "Não")</code> </li>
+                <li><strong>"Producao_Total":</strong> soma todas as produções acadêmicas registradas, combinando artigos científicos e produções didático-pedagógicas relevantes:
+                    <br>
+                    <code>=SOMA(Database!$H2:$R2)</code>
+                </li>
+
+                <li><strong>"Indice_Completude":</strong> métrica criada para estimar o nível de consistência do docente ao longo da carreira, considerando critérios como experiência, tempo de atuação, produção acima da mediana e envolvimento em EAD:
+                    <br>
+                    <code>=SE(Database!$D4 = "Sim"; 1; 0) + SE(Database!$E4>5; 1; 0) + SE(W4>MED(W4:W41); 1; 0) + SE(V4="Sim"; 1; 0)</code>
+                </li>
+
+                <li><strong>"Indice_Diversificacao":</strong> mede a variedade de tipos de produção realizados, contabilizando quantas categorias diferentes possuem valores positivos:
+                    <br>
+                    <code>=CONT.SE(Database!$H2:$R2;">0")</code>
+                </li>
+
+                <li><strong>"Tem_Propriedade_Int":</strong> identifica docentes que possuem registro ou depósito de propriedade intelectual, facilitando a análise de inovação na instituição:
+                    <br>
+                    <code>=SE(OU(Database!$O2>0;Database!$P2>0); "Sim"; "Não")</code>
+                </li>
+
+            </ul>
+            <p>Com os dados tratados e enriquecidos, foi criada uma planilha dedicada exclusivamente às tabelas dinâmicas, que servem como base para todos os gráficos e indicadores do dashboard. Essa estrutura garante que qualquer nova atualização na base original
+                seja refletida automaticamente nas visualizações, tornando o painel interativo, responsivo e adequado para análises contínuas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">4. C — Elaboração da Solução (Dashboard e análises)</p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">5. E — Avaliação da Solução</p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+            <p>A solução desenvolvida atende de forma eficaz aos objetivos definidos no início da análise e demonstra clara capacidade de apoiar a tomada de decisão por parte de gestores acadêmicos. O dashboard criado consolida informações relevantes sobre produção
+                docente, experiência, diversificação e completude, permitindo uma visão estruturada e de fácil interpretação.</p>
+            <p>Os gráficos de maiores produtores e produção ao longo da carreira possibilitam identificar rapidamente tanto os docentes mais produtivos quanto padrões de desempenho associados ao tempo de atuação. Já o gráfico de distribuição por área do conhecimento
+                expõe de maneira objetiva a concentração da produção em uma área predominante, evidenciando possíveis desequilíbrios entre os campos de pesquisa.</p>
+            <p>As métricas de experiência, formação didática e indicadores calculados (como índice de completude e diversificação) enriquecem a análise ao fornecerem parâmetros adicionais que ajudam a contextualizar o desempenho individual e do grupo como um todo.</p>
+            <p>Os filtros dinâmicos aplicados no dashboard, como vinculação e participação em EAD, aumentam a flexibilidade analítica e permitem que o gestor realize comparações específicas entre diferentes perfis de docentes. Esse recurso torna a ferramenta adaptável
+                a múltiplas necessidades, desde relatórios rápidos até investigações mais profundas.</p>
+            <p>No contexto de uso institucional, a solução permite identificar:</p>
+            <ul>
+                <li><strong>Docentes de alta performance</strong>, que podem ser incentivados a liderar projetos estratégicos; </li>
+                <li><strong>Áreas com baixa produção</strong>, que merecem atenção ou políticas de estímulo; </li>
+                <li><strong>Perfis de docentes iniciantes ou com pouca produção</strong>, que podem se beneficiar de programas de capacitação e mentoria;</li>
+                <li><strong>Inconsistências de completude</strong>, indicando necessidade de acompanhamento mais próximo.</li>
+            </ul>
+            <p>De forma geral, o dashboard se apresenta como uma ferramenta robusta e funcional, capaz de transformar dados dispersos em insights valiosos. A solução cumpre plenamente o propósito de oferecer uma visão clara, objetiva e orientada para ação, mostrando-se
+                adequada para apoiar decisões gerenciais relacionadas ao desenvolvimento docente e ao planejamento institucional.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">6. Desenvolvimento de Ferramenta de Suporte</p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+            <p>A ferramenta construída foi planejada para ser reutilizável, escalável e fácil de atualizar, garantindo que seu uso possa se estender além desta análise inicial. Toda a estrutura — desde a base de dados tratada até as tabelas dinâmicas e gráficos
+                — foi organizada com foco na manutenção contínua.</p>
+            <p>O dashboard permite atualizações rápidas: basta substituir ou acrescentar novos registros na planilha original para que todas as visualizações e indicadores sejam automaticamente atualizados. Isso é possível graças ao uso de referências estruturadas
+                e à centralização das tabelas dinâmicas em uma planilha dedicada, garantindo consistência e reduzindo erros ao longo do tempo.</p>
+            <p>Além disso, o formato modular do projeto facilita sua adaptação para outros contextos acadêmicos. A mesma estrutura pode ser aproveitada por diferentes departamentos, cursos ou unidades institucionais, bastando ajustar a base de dados às novas necessidades.
+                Isso transforma o dashboard em um recurso versátil e replicável.</p>
+            <p>Outro ponto importante é que a organização do arquivo torna o processo de auditoria e revisão mais simples, permitindo que diferentes membros da equipe possam atualizar dados, ajustar parâmetros ou adicionar novos indicadores sem comprometer o funcionamento
+                geral da ferramenta.</p>
+            <p>Dessa forma, o dashboard não apenas atende ao trabalho atual, mas também se constitui como uma ferramenta de suporte contínuo, oferecendo uma base sólida para análises futuras, acompanhamento anual e expansão para novos cenários ou conjuntos de dados.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-5">
+      <header class="card-header">
+        <p class="card-header-title">7. Implantação</p>
+      </header>
+      <div class="card-content">
+        <div class="content">
+            <p>A implementação do dashboard em ambiente institucional requer alguns cuidados para garantir sua utilização contínua e eficaz pelos gestores universitários. Para que a ferramenta opere de forma consistente ao longo do tempo, é essencial que a base
+                de dados seja atualizada periodicamente e siga um padrão de organização previamente definido.</p>
+            <p>A manutenção anual da planilha é fundamental. Gestores ou equipes responsáveis devem inserir os novos registros de docentes e atualizar informações de produção acadêmica, experiência, formação e outros indicadores relevantes. Como o dashboard foi
+                construído de forma modular e conectado por tabelas dinâmicas, qualquer atualização na base original se reflete automaticamente nos gráficos e métricas exibidas, eliminando a necessidade de reconstrução manual do painel.</p>
+            <p>Para ampliar o potencial analítico, recomenda-se também que a instituição registre dados históricos de cada docente. A incorporação de informações referentes a anos anteriores possibilitaria análises temporais mais ricas, identificação de tendências
+                de longo prazo e acompanhamento da evolução de políticas internas de incentivo à pesquisa e produção científica.</p>
+            <p>Outro ponto importante é a integração do dashboard ao fluxo institucional. Ao disponibilizar a ferramenta para coordenações, chefias de departamento e comissões acadêmicas, a universidade cria uma base sólida para tomada de decisão orientada por dados,
+                favorecendo o planejamento de ações estratégicas, a distribuição de recursos e o acompanhamento de metas de desempenho docente.</p>
+            <p>Dessa forma, a implantação do dashboard não se limita à simples utilização técnica da planilha, mas envolve sua incorporação ao processo de gestão acadêmica, garantindo que as informações geradas contribuam efetivamente para o desenvolvimento institucional.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- CARD 3: GRÁFICO 
     <div class="card mb-5">
       <header class="card-header">
@@ -426,53 +638,6 @@ body.dark .dark-toggle:hover {
       </div>
     </div> -->
 
-    <!-- CARD 4: TABELA DE DADOS
-    <div class="card mb-5">
-      <header class="card-header">
-        <p class="card-header-title">📋 Detalhamento por Categoria</p>
-      </header>
-      <div class="card-content">
-        <div class="table-container">
-          <table class="table is-fullwidth is-striped is-hoverable">
-            <thead>
-              <tr>
-                <th>Categoria</th>
-                <th>Receita</th>
-                <th>Percentual</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Tecnologia</strong></td>
-                <td>R$ 125.430</td>
-                <td>38%</td>
-                <td><span class="badge success">✓ Ativo</span></td>
-              </tr>
-              <tr>
-                <td><strong>Marketing</strong></td>
-                <td>R$ 98.920</td>
-                <td>30%</td>
-                <td><span class="badge success">✓ Ativo</span></td>
-              </tr>
-              <tr>
-                <td><strong>Operações</strong></td>
-                <td>R$ 104.210</td>
-                <td>32%</td>
-                <td><span class="badge warning">⚠ Atenção</span></td>
-              </tr>
-              <tr>
-                <td><strong>Total</strong></td>
-                <td><strong>R$ 328.560</strong></td>
-                <td><strong>100%</strong></td>
-                <td>-</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div> -->
-
     <!-- CARD 5: CONCLUSÃO -->
     <div class="card mb-5">
       <header class="card-header">
@@ -482,18 +647,24 @@ body.dark .dark-toggle:hover {
         <div class="content">
           <p><strong>Principais Insights:</strong></p>
           <ul>
-            <li><strong>Produtividade Concentrada:</strong> Um pequeno grupo de docentes concentra a maior parte da produção, indicando que parte significativa do corpo docente tem baixa ou nenhuma entrega anual.</li>
-            <li><strong>Experiência Relevante:</strong> 58% dos professores possuem mais de 5 anos de carreira — e isso se reflete nas curvas de produção, onde picos maiores ocorrem entre docentes mais experientes.</li>
-            <li><strong>Completude Moderada:</strong> O índice de completude apresenta variações importantes, revelando que uma parcela dos docentes inicia trabalhos, mas não os finaliza com regularidade.</li>
-            <li><strong>Foco em uma Área Predominante:</strong> A maior parte dos artigos está concentrada em uma única área do conhecimento, enquanto as demais áreas possuem baixa produção relativa.</li>
+            <li><strong>Produtividade Concentrada:</strong> A análise evidencia que a maior parte da produção acadêmica está concentrada em um número reduzido de docentes. Isso indica um cenário de assimetria produtiva, no qual parte significativa do corpo docente apresenta baixa ou nenhuma entrega anual.</li>
+
+            <li><strong>Experiência como Fator de Impacto:</strong> Aproximadamente 58% dos professores possuem mais de cinco anos de carreira, e esse grupo demonstra picos de produção mais altos e mais consistentes. Isso reforça a relação entre maturidade profissional e desempenho acadêmico.</li>
+
+            <li><strong>Variabilidade no Índice de Completude:</strong> O índice de completude apresenta grande dispersão entre os docentes, revelando que muitos iniciam atividades, mas não mantêm a mesma regularidade na finalização. Esse resultado aponta uma oportunidade para fortalecer práticas de acompanhamento e gestão de projetos individuais.</li>
+
+            <li><strong>Concentração Temática Evidente:</strong> Os dados mostram forte predominância de artigos em uma única área do conhecimento, enquanto as demais áreas apresentam baixa participação. Essa concentração reduz a diversidade científica e pode limitar o impacto institucional em diferentes frentes de pesquisa.</li>
           </ul>
-          
+
           <p><strong>Próximos Passos:</strong></p>
           <ol>
-            <li>Incentivar docentes iniciantes e de menor produção por meio de oficinas, tutorias ou acompanhamento pedagógico para distribuir melhor o volume de publicações.</li>
-            <li>Criar estratégias para aumentar a completude, como metas semestrais, grupos de pesquisa ativos ou ciclos de revisão.</li>
-            <li>Estimular diversificação entre áreas, reduzindo dependência de um único campo de pesquisa e fortalecendo a interdisciplinaridade.</li>
-            <li>Aproveitar o potencial dos professores mais experientes, incentivando que liderem projetos colaborativos e apoiem o desenvolvimento dos recém-ingressos.</li>
+            <li><strong>Fortalecer docentes em fase inicial ou com menor produção</strong>, promovendo ações de capacitação, acompanhamento pedagógico e incentivo a práticas de pesquisa mais estruturadas.</li>
+
+            <li><strong>Melhorar a taxa de completude</strong> por meio de metas definidas, monitoramento semestral e estímulo a participação em grupos de pesquisa, ampliando a consistência na finalização dos trabalhos.</li>
+
+            <li><strong>Fomentar a diversificação temática</strong>, incentivando projetos interdisciplinares e ampliando o suporte a áreas com baixa participação, diminuindo a dependência de uma única frente de pesquisa.</li>
+
+            <li><strong>Potencializar o papel dos docentes experientes</strong> como mentores e líderes de produção colaborativa, permitindo que seu desempenho sirva como multiplicador e elevando o nível geral da produção institucional.</li>
           </ol>
         </div>
       </div>
